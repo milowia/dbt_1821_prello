@@ -1,0 +1,68 @@
+
+version: 2
+
+sources:
+  - name: raw
+    schema: 1821_prello
+    description: raw dataset from prello
+    tables: 
+      - name: establishments
+        identifier: POI_tourist_establishments
+        description: point of interest of tourist establishments in each city
+        tests:
+          - unique:
+              column_name: "(municipality_code ||'_'|| name_reprocessed ||'_'|| poi)"
+
+      - name: sites
+        identifier: POI_touristic_sites_by_municipality
+        description: point of interest of tourist sites in each city
+        tests:
+          - unique:
+              column_name: "(municipality_code ||'_'|| name_reprocessed ||'_'|| poi)"
+
+      - name: salary
+        identifier: average_salary_by_municipality
+        description: average salary in each city
+        tests:
+          - unique:
+              column_name: "municipality_code ||'_'|| year"
+
+      - name: geographic
+        identifier: geographical_referential
+        description: geographics of each city
+        tests:
+          - unique:
+              column_name: "municipality_code"
+
+      - name: housing
+        identifier: housing_stock
+        description: stock of housing in each city
+        tests:
+          - unique:
+              column_name: "municipality_code"
+
+      - name: notary
+        identifier: notary_real_estate_sales
+        tests:
+          - unique:
+              column_name: "sales_date ||'_'|| municipality_code ||'_'|| street_code ||'_'|| street_number"
+
+      - name: population
+        identifier: population_by_municipality
+        tests:
+          - unique:
+              column_name: "municipality_code ||'_'|| year"
+
+      - name: poverty_population
+        identifier: poverty_population_by_municipality
+        tests:
+          - unique:
+              column_name: "municipality_code ||'_'|| year"
+
+      - name: rental
+        identifier: real_estate_info_by_municipality
+        tests:
+          - unique:
+              column_name: "municipality_code"
+
+
